@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Links</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+        body {
+            font-family: 'MedievalSharp', cursive;
+            background-color: #2c3e50;
+            color: #f3f2e8;
+            padding-bottom: 100px; /* Add padding to accommodate the clock and weather widget */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #category-menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .category-item {
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .category-item.active::after {
+            content: '';
+            position: absolute;
+            width: 105%;
+            height: 101%;
+            background-color: transparent;
+            bottom: 0px;
+            left: -1px;
+            box-shadow: 0 0 2px #00f, 0 0 2px #00f, 0 0 2px #000073, 0 0 3px #000073, 0 0 3px #000073, 0 0 3px #000073, 0 0 70px #000073;
+        }
+
+        .link-container {
+            display: none;
+        }
+
+        .link-grid {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #fff;
+            text-align: center;
+            animation: glow 1s ease-in-out infinite alternate;
+            background-color: #f1c40f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px; /* Increased spacing between link items */
+            text-shadow: 0 0 2px #00f, 0 0 2px #00f, 0 0 2px #000073, 0 0 3px #000073, 0 0 3px #000073, 0 0 3px #000073, 0 0 70px #000073;
+        }
+
+        .link-item i {
+            font-size: 24px;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            background-color: #2c3e50;
+            color: #f3f2e8;
+            border-radius: 4px;
+        }
+
+        .link-item a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .link-item a:before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .link-container.active {
+            display: block;
+        }
+
+        .widget-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock-widget,
+        .weather-widget {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .glow {
+          font-size: 80px;
+          color: #fff;
+          text-align: center;
+          -webkit-animation: glow 1s ease-in-out infinite alternate;
+          -moz-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Links Page</h1>
+
+    <div id="category-menu">
+        <div class="category-item" onclick="toggleCategory('social')" data-category="social">Social</div>
+        <div class="category-item" onclick="toggleCategory('news')" data-category="news">News</div>
+        <div class="category-item" onclick="toggleCategory('sports')" data-category="sports">Sports</div>
+        <div class="category-item" onclick="toggleCategory('anime')" data-category="anime">Anime</div>
+        <div class="category-item" onclick="toggleCategory('shopping')" data-category="shopping">Shopping</div>
+    </div>
+
+    <div class="link-container active" id="social">
+        <h2>Social</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <i class="fab fa-facebook icon"></i>
+                <a href="https://www.facebook.com">Facebook</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-twitter icon"></i>
+                <a href="https://www.twitter.com">Twitter</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-instagram icon"></i>
+                <a href="https://www.instagram.com">Instagram</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-youtube icon"></i>
+                <a href="https://www.youtube.com">Youtube</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-pinterest icon"></i>
+                <a href="https://www.pinterest.com">Pinterest</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-google icon"></i>
+                <a href="https://www.gmail.com">Gmail</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-reddit icon"></i>
+                <a href="https://www.reddit.com">Reddit</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-discord icon"></i>
+                <a href="https://www.discord.com">Discord</a>
+            </div>
+            <div class="link-item">
+                <i class="fab fa-twitch icon"></i>
+                <a href="https://www.twitch.tv">Twitch</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="link-container" id="news">
+        <h2>News</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.cartacapital.com.br/">Carta Capital</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://news.google.com/home?hl=pt-BR&gl=BR&ceid=BR:pt-419">Google Notícias</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.gazetadopovo.com.br/">Gazeta do Povo</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.nexojornal.com.br/">Nexojornal</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="link-container" id="sports">
+        <h2>Sports</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.espn.com.br/">ESPN</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.lance.com.br/">Lance!</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://tntsports.com.br/">TNT Sports</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.mg.superesportes.com.br/">Super Esportes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="link-container" id="anime">
+        <h2>Anime</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://donghuanosekai.com/">Donghua no Sekai</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://animefire.net/">AnimeFire</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://animesgames.net/">Animes Games</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="link-container" id="shopping">
+        <h2>Shopping</h2>
+        <div class="link-grid">
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.amazon.com.br/">Amazon</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.kabum.com.br/">Kabum</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://www.mercadolivre.com.br/">Mercado Livre</a>
+            </div>
+            <div class="link-item">
+                <i class="fas fa-external-link-alt icon"></i>
+                <a href="https://shopee.com.br/">Shopee</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget-container">
+        <div class="clock-widget" id="clock"></div>
+        <div class="weather-widget" id="weather"></div>
+    </div>
+
+    <script>
+        // Clock Widget
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            var time = hours + ":" + minutes + ":" + seconds;
+            document.getElementById("clock").textContent = time;
+
+            setTimeout(updateClock, 1000);
+        }
+
+        updateClock();
+
+        // Weather Widget
+        function updateWeather() {
+            // Replace with your weather API code
+            var weatherData = {
+                temperature: 25,
+                condition: "Sunny"
+            };
+
+            var weatherText = weatherData.temperature + "°C, " + weatherData.condition;
+            document.getElementById("weather").textContent = weatherText;
+        }
+
+        updateWeather();
+
+        // Toggle Category
+        function toggleCategory(category) {
+            var categoryContainers = document.querySelectorAll('.link-container');
+            var categoryMenuItems = document.querySelectorAll('.category-item');
+
+            categoryContainers.forEach(function (container) {
+                container.classList.remove('active');
+            });
+
+            categoryMenuItems.forEach(function (menuItem) {
+                menuItem.classList.remove('active');
+            });
+
+            var selectedCategory = document.getElementById(category);
+            var selectedMenuItem = document.querySelector('.category-item[data-category="' + category + '"]');
+
+            selectedCategory.classList.add('active');
+            selectedMenuItem.classList.add('active');
+        }
+
+        // Sort Links Alphabetically
+        function sortLinks() {
+            var linkContainers = document.querySelectorAll('.link-container');
+
+            linkContainers.forEach(function (container) {
+                var linkGrid = container.querySelector('.link-grid');
+                var linkItems = Array.from(linkGrid.children);
+                var sortedItems = linkItems.sort(function (a, b) {
+                    var textA = a.querySelector('a').textContent.toUpperCase();
+                    var textB = b.querySelector('a').textContent.toUpperCase();
+                    return textA.localeCompare(textB);
+                });
+
+                sortedItems.forEach(function (item) {
+                    linkGrid.appendChild(item);
+                });
+            });
+        }
+
+        // Set the "Social" category as active by default
+        toggleCategory('social');
+
+        // Sort the links alphabetically
+        sortLinks();
+    </script>
+</body>
+</html>
